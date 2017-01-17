@@ -1,10 +1,8 @@
 // importScripts('file:///D:/WORK%20PROFIRESCU/PROGRAMMING%20and%20Design/Udacity-Front%20End%20Dev/web-workers-demo/scripts/imageManips.js');
-importScripts('/scripts/imageManips.js');
+importScripts('imageManips.js');
 this.onmessage = function(e) {
   var imageData = e.data.imageData;
   var type = e.data.type;
-console.log("type requested is: "+type);
-
 
   try {
     length = imageData.data.length / 4;

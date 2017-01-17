@@ -7,7 +7,7 @@
   var ctx = canvas.getContext('2d');
 
   // var myWorker=new Worker('file:///D:/WORK%20PROFIRESCU/PROGRAMMING%20and%20Design/Udacity-Front%20End%20Dev/web-workers-demo/scripts/worker.js');
-var myWorker=new Worker('worker.js');
+var myWorker=new Worker('/scripts/worker.js');
 //BP: rahatul asta de adresa se pune pe ca Chrome nu vrea sa acceseze fisiere locale, asa e  facut browserul
 //BP: vezi http://stackoverflow.com/questions/21408510/chrome-cant-load-web-worker
 
@@ -51,8 +51,9 @@ var myWorker=new Worker('worker.js');
     // receive messages from the web worker.
     myWorker.postMessage({'imageData':imageData, 'type':type});
     myWorker.onmessage = function(e) {
-                      imageData = e.data.imageData;
+                      imageData = e.data; //e.data pt ca asa e in solutia lor
                       console.log('Message received from worker');
+                      return ctx.putImageData(imageData, 0, 0);
                     };
 
     // length = imageData.data.length / 4;
@@ -68,7 +69,6 @@ var myWorker=new Worker('worker.js');
     //   imageData.data[i * 4 + 3] = pixel[3];
     // }
     toggleButtonsAbledness();
-    return ctx.putImageData(imageData, 0, 0);
   };
 
   function revertImage() {
